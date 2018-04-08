@@ -27,8 +27,6 @@ import com.swifty.fillcolor.util.CommentUtil;
 import com.swifty.fillcolor.util.DensityUtil;
 import com.swifty.fillcolor.util.FileUtils;
 import com.swifty.fillcolor.util.SNSUtil;
-import com.swifty.fillcolor.util.UmengLoginUtil;
-import com.swifty.fillcolor.util.UmengUtil;
 import com.swifty.fillcolor.view.ColorPickerSeekBar;
 import com.swifty.fillcolor.view.MyDialogStyle;
 import com.swifty.fillcolor.view.MyProgressDialog;
@@ -52,10 +50,9 @@ public class MyDialogFactory extends MyDialogStyle {
     public void showAboutDialog() {
         StringBuffer buffer = new StringBuffer();
         buffer.append(context.getString(R.string.version) + ":" + MyApplication.getVersion(context) + "\n");
-        buffer.append(UmengUtil.getCurrentVersionDetail(context) + "\n");
         buffer.append(context.getString(R.string.aboutImage) + "\n");
-        buffer.append(context.getString(R.string.email) + ":" + context.getString(R.string.authoremail) + "\n");
-        buffer.append(context.getString(R.string.qqgroup) + ":" + context.getString(R.string.qqgroupnumber));
+//        buffer.append(context.getString(R.string.email) + ":" + context.getString(R.string.authoremail) + "\n");
+//        buffer.append(context.getString(R.string.qqgroup) + ":" + context.getString(R.string.qqgroupnumber));
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +98,6 @@ public class MyDialogFactory extends MyDialogStyle {
         checkupdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UmengUtil.checkUpdate(context);
             }
         });
         Button button2 = (Button) layout.findViewById(R.id.joinQQGroup);
@@ -324,7 +320,6 @@ public class MyDialogFactory extends MyDialogStyle {
             @Override
             public void onClick(View view) {
                 dismissDialog();
-                UmengUtil.checkUpdate(context);
             }
         };
         showTwoButtonDialog(buffer, context.getString(R.string.updateVersion), context.getString(R.string.cancel), listener1, listener2, true);
@@ -432,13 +427,11 @@ public class MyDialogFactory extends MyDialogStyle {
         View.OnClickListener listener2 = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UmengLoginUtil.getInstance().faceBookLogin(context, onLoginSuccessListener);
             }
         };
         View.OnClickListener listener1 = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UmengLoginUtil.getInstance().qqLogin((Activity) context, onLoginSuccessListener);
             }
         };
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -454,13 +447,11 @@ public class MyDialogFactory extends MyDialogStyle {
         View.OnClickListener listener2 = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UmengLoginUtil.getInstance().faceBookLogin(context, onLoginSuccessListener);
             }
         };
         View.OnClickListener listener1 = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UmengLoginUtil.getInstance().qqLogin((Activity) context, onLoginSuccessListener);
             }
         };
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {

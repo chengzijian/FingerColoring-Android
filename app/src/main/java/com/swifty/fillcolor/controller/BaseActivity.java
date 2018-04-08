@@ -10,7 +10,6 @@ import android.widget.EditText;
 
 import com.swifty.fillcolor.MyApplication;
 import com.swifty.fillcolor.util.L;
-import com.swifty.fillcolor.util.UmengUtil;
 
 /**
  * Created by macpro001 on 4/8/15.
@@ -21,13 +20,11 @@ public class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         MyApplication.initLanguage(this);
-        UmengUtil.analysisOnResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        UmengUtil.analysisOnPause(this);
     }
 
     @Override

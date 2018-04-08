@@ -35,7 +35,6 @@ import com.swifty.fillcolor.util.FileUtils;
 import com.swifty.fillcolor.util.ImageSaveUtil;
 import com.swifty.fillcolor.util.L;
 import com.swifty.fillcolor.util.ShareImageUtil;
-import com.swifty.fillcolor.util.UmengUtil;
 import com.swifty.fillcolor.view.ColorPicker;
 import com.swifty.fillcolor.view.ImageButton_define;
 import com.swifty.fillcolor.view.ImageButton_define_secondLay;
@@ -516,7 +515,6 @@ public class PaintActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void shareImage() {
-        UmengUtil.analysitic(PaintActivity.this, UmengUtil.SHAREIMAGE, URL);
         MyProgressDialog.show(PaintActivity.this, null, getString(R.string.savingimage));
         SaveImageAsyn saveImageAsyn = new SaveImageAsyn();
         if (fromSDcard) {
@@ -539,7 +537,6 @@ public class PaintActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void saveToLocal() {
-        UmengUtil.analysitic(PaintActivity.this, UmengUtil.SAVEIMAGE, URL);
         MyProgressDialog.show(PaintActivity.this, null, getString(R.string.savingimage));
         SaveImageAsyn saveImageAsyn = new SaveImageAsyn();
         if (fromSDcard) {
@@ -561,7 +558,6 @@ public class PaintActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void saveToLocal(SaveImageAsyn.OnSaveFinishListener onSaveFinishListener) {
-        UmengUtil.analysitic(PaintActivity.this, UmengUtil.SAVEIMAGE, URL);
         MyProgressDialog.show(PaintActivity.this, null, getString(R.string.savingimage));
         SaveImageAsyn saveImageAsyn = new SaveImageAsyn();
         if (fromSDcard) {
@@ -665,7 +661,6 @@ public class PaintActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void saveToLocalandFinish() {
-        UmengUtil.analysitic(PaintActivity.this, UmengUtil.SAVEIMAGE, URL);
         MyProgressDialog.show(PaintActivity.this, null, getString(R.string.savingimage));
         SaveImageAsyn saveImageAsyn = new SaveImageAsyn();
         if (fromSDcard) {

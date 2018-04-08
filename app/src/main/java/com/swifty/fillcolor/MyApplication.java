@@ -14,14 +14,10 @@ import android.view.WindowManager;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.swifty.fillcolor.broadcast.LoginSuccessBroadcast;
 import com.swifty.fillcolor.factory.SharedPreferencesFactory;
-import com.swifty.fillcolor.listener.OnLoginSuccessListener;
 import com.swifty.fillcolor.model.bean.UserBean;
 import com.swifty.fillcolor.util.ImageLoaderUtil;
 import com.swifty.fillcolor.util.L;
-import com.swifty.fillcolor.util.UmengLoginUtil;
-import com.swifty.fillcolor.util.UmengUtil;
 
 import java.util.Locale;
 
@@ -67,7 +63,6 @@ public class MyApplication extends Application {
         super.onCreate();
         initLanguage(this);
         initImageLoader();
-        UmengUtil.autoUpdate(this);
         screenWidth = getScreenWidth(this);
     }
 

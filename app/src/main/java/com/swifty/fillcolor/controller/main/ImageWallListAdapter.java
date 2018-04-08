@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.swifty.fillcolor.R;
-import com.umeng.message.proguard.T;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.List;
 /**
  * Created by Swifty.Wang on 2015/8/20.
  */
-public class ImageWallListAdapter extends RecyclerView.Adapter<ImageWallListAdapter.ViewHolder> {
+public class ImageWallListAdapter<T> extends RecyclerView.Adapter<ImageWallListAdapter.ViewHolder> {
 
     private Context mContext;
     List<T> imagewall;

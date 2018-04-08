@@ -13,12 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.swifty.fillcolor.MyApplication;
 import com.swifty.fillcolor.R;
-import com.swifty.fillcolor.broadcast.LoginSuccessBroadcast;
 import com.swifty.fillcolor.controller.AppCompatBaseAcitivity;
 import com.swifty.fillcolor.factory.MyDialogFactory;
 import com.swifty.fillcolor.factory.SharedPreferencesFactory;
@@ -26,10 +24,7 @@ import com.swifty.fillcolor.listener.OnLoginSuccessListener;
 import com.swifty.fillcolor.model.bean.UserBean;
 import com.swifty.fillcolor.receiver.UserLoginReceiver;
 import com.swifty.fillcolor.util.CommentUtil;
-import com.swifty.fillcolor.util.L;
 import com.swifty.fillcolor.util.SNSUtil;
-import com.swifty.fillcolor.util.UmengLoginUtil;
-import com.swifty.fillcolor.util.UmengUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,28 +48,11 @@ public class MainActivity extends AppCompatBaseAcitivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.app_name);
-        UmengUtil.pushNotification(this);
-        //autoLogin();
         initViews();
-        showMarketCommentDialog();
+        //showMarketCommentDialog();
         receiver = new UserLoginReceiver();
         filter = new IntentFilter();
         filter.addAction("userLoginAction");
-    }
-
-    private void autoLogin() {
-        MyApplication.userToken = SharedPreferencesFactory.grabString(this, SharedPreferencesFactory.USERSESSION);
-        L.e(MyApplication.userToken);
-        if (MyApplication.userToken != null && !MyApplication.userToken.isEmpty()) {
-            Toast.makeText(this, getString(R.string.loginbg), Toast.LENGTH_SHORT).show();
-            UmengLoginUtil.getInstance().serverBackgroundLogin(new OnLoginSuccessListener() {
-                @Override
-                public void onLoginSuccess(UserBean userBean) {
-                    if (userBean != null && userBean.getUsers() != null)
-                        LoginSuccessBroadcast.getInstance().sendBroadcast(MainActivity.this);
-                }
-            });
-        }
     }
 
     private void showMarketCommentDialog() {
@@ -128,19 +106,6 @@ public class MainActivity extends AppCompatBaseAcitivity {
         }
     }
 
-    private void showFirstTimeLoginDialog() {
-        if (MyApplication.user == null && SharedPreferencesFactory.getBoolean(this, SharedPreferencesFactory.IsFirstTimeShowLoginDialog, true)) {
-            myDialogFactory.showFirstTimeLoginDialog(new OnLoginSuccessListener() {
-                @Override
-                public void onLoginSuccess(UserBean userBean) {
-                    UmengLoginUtil.getInstance().loginSuccessEvent(MainActivity.this, userBean, myDialogFactory);
-                }
-            });
-            SharedPreferencesFactory.saveBoolean(this, SharedPreferencesFactory.IsFirstTimeShowLoginDialog, false);
-        }
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -192,7 +157,6 @@ public class MainActivity extends AppCompatBaseAcitivity {
         } else if (id == R.id.action_setting) {
             myDialogFactory.showSettingDialog();
         } else if (id == R.id.action_logout) {
-            UmengLoginUtil.getInstance().logout(this);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -210,7 +174,6 @@ public class MainActivity extends AppCompatBaseAcitivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        UmengLoginUtil.getInstance().onActivityResult(requestCode, resultCode, data);
     }
 
 

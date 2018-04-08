@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +20,6 @@ import com.swifty.fillcolor.model.bean.PictureBean;
 import com.swifty.fillcolor.util.L;
 import com.swifty.fillcolor.util.ListAnimationUtil;
 import com.swifty.fillcolor.util.NetWorkUtil;
-import com.swifty.fillcolor.util.UmengUtil;
 import com.swifty.fillcolor.view.EmptyRecyclerView;
 
 import java.io.IOException;
@@ -50,7 +50,8 @@ public class GridViewActivity extends BaseActivity {
             pictureBeans = getSecretGardenBean(new ArrayList<>(Arrays.asList(getAssets().list("SecretGarden"))));
             L.e(pictureBeans.size() + "");
             if (pictureBeans == null) {
-                Toast.makeText(GridViewActivity.this, getString(R.string.loadfailed), Toast.LENGTH_SHORT).show();
+                Log.e("loadfailed", getString(R.string.loadfailed));
+                //Toast.makeText(GridViewActivity.this, getString(R.string.loadfailed), Toast.LENGTH_SHORT).show();
             } else {
                 showGrid(true);
             }
@@ -94,7 +95,8 @@ public class GridViewActivity extends BaseActivity {
                     pictureBeans = pictures;
                     showGrid(false);
                 } else {
-                    Toast.makeText(GridViewActivity.this, getString(R.string.loadfailed), Toast.LENGTH_SHORT).show();
+                    Log.e("loadfailed", getString(R.string.loadfailed));
+                    //Toast.makeText(GridViewActivity.this, getString(R.string.loadfailed), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -106,7 +108,8 @@ public class GridViewActivity extends BaseActivity {
                         swipeView.setRefreshing(false);
                     }
                 });
-                Toast.makeText(GridViewActivity.this, getString(R.string.loadfailed), Toast.LENGTH_SHORT).show();
+                Log.e("loadfailed", getString(R.string.loadfailed));
+                //Toast.makeText(GridViewActivity.this, getString(R.string.loadfailed), Toast.LENGTH_SHORT).show();
             }
         });
 //        } else {
@@ -138,7 +141,8 @@ public class GridViewActivity extends BaseActivity {
                         @Override
                         public void LoadPicFailed(String error) {
                             swipeView.setRefreshing(false);
-                            Toast.makeText(GridViewActivity.this, getString(R.string.loadfailed), Toast.LENGTH_SHORT).show();
+                            Log.e("loadfailed", getString(R.string.loadfailed));
+                            //Toast.makeText(GridViewActivity.this, getString(R.string.loadfailed), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
@@ -150,7 +154,6 @@ public class GridViewActivity extends BaseActivity {
     }
 
     private void gotoPaintActivity(String s) {
-        UmengUtil.analysitic(this, UmengUtil.MODELNUMBER, getIntent().getStringExtra(MyApplication.THEMENAME) + categoryId);
         Intent intent = new Intent(this, PaintActivity.class);
         if (s.contains(MyApplication.MainUrl)) {
             intent.putExtra(MyApplication.BIGPIC, s);

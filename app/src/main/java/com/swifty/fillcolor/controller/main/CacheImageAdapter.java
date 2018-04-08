@@ -14,7 +14,6 @@ import com.swifty.fillcolor.R;
 import com.swifty.fillcolor.controller.paint.PaintActivity;
 import com.swifty.fillcolor.model.AsynImageLoader;
 import com.swifty.fillcolor.model.bean.CacheImageBean;
-import com.swifty.fillcolor.util.UmengUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +58,6 @@ public class CacheImageAdapter extends RecyclerView.Adapter<CacheImageAdapter.Vi
     }
 
     private void gotoPaintActivity(String s) {
-        UmengUtil.analysitic(context, UmengUtil.MODELNUMBER, s);
         Intent intent = new Intent(context, PaintActivity.class);
         intent.putExtra(MyApplication.BIGPIC, s);
         context.startActivity(intent);

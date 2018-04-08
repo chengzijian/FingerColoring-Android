@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,6 @@ import com.swifty.fillcolor.model.bean.ThemeBean;
 import com.swifty.fillcolor.util.L;
 import com.swifty.fillcolor.util.ListAnimationUtil;
 import com.swifty.fillcolor.util.NetWorkUtil;
-import com.swifty.fillcolor.util.UmengUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +86,7 @@ public class ThemeListFragment extends BaseFragment {
         listView.setLayoutManager(layoutManager);
         refreshLayout.setColorSchemeResources(R.color.red, R.color.orange, R.color.green, R.color.maincolor);
         footer = (Button) LayoutInflater.from(getActivity()).inflate(R.layout.textview_footer, null).findViewById(R.id.footer);
+        footer.setVisibility(View.GONE);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -135,7 +136,8 @@ public class ThemeListFragment extends BaseFragment {
                         if (themes != null && !themes.isEmpty()) {
                             themelist.addAll(themes);
                         } else {
-                            Toast.makeText(getActivity(), getString(R.string.loadfailed), Toast.LENGTH_SHORT).show();
+                            Log.e("loadfailed", getString(R.string.loadfailed));
+                            //Toast.makeText(getActivity(), getString(R.string.loadfailed), Toast.LENGTH_SHORT).show();
                         }
                         page = themelist.size() / ONEPAGENUMBER - 1;
                         addListListener();
@@ -156,7 +158,8 @@ public class ThemeListFragment extends BaseFragment {
                                 themelist.addAll(themes);
                                 L.e(themelist.size() + "");
                             } else {
-                                Toast.makeText(getActivity(), getString(R.string.loadfailed), Toast.LENGTH_SHORT).show();
+                                Log.e("loadfailed", getString(R.string.loadfailed));
+                                //Toast.makeText(getActivity(), getString(R.string.loadfailed), Toast.LENGTH_SHORT).show();
                             }
                             page = 0;
                             alphaAdapter.notifyDataSetChanged();
@@ -247,7 +250,6 @@ public class ThemeListFragment extends BaseFragment {
     }
 
     private void gotoDetailGridActivity(int i) {
-        UmengUtil.analysitic(getActivity(), UmengUtil.THEMENAME, themelist.get(i).getN());
         Intent intent = new Intent(getActivity(), GridViewActivity.class);
         intent.putExtra(MyApplication.THEMEID, themelist.get(i).getC());
         intent.putExtra(MyApplication.THEMENAME, themelist.get(i).getN());

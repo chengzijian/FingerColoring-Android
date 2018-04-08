@@ -31,7 +31,8 @@
                 android:id="@+id/action_comment"
                 android:icon="@drawable/ic_comment_black_24dp"
                 android:title="@string/marketcomment"
-                app:showAsAction="never|withText" />
+                app:showAsAction="never|withText"
+                android:visible="false"/>
             <item
                 android:id="@+id/about"
                 android:icon="@drawable/ic_help_black_24dp"

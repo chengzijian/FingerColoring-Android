@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">手指填图-秘密花园</string>
+    <string name="app_name">手指填图</string>
     <string name="UMENGAPPKEY">55c0b9f967e58ee78f00231d</string>
     <string name="BAIDUAPIKEY">iD8ulydDkWhNWFmQEGEGY4m9</string>
     <string name="CHANNEL">default</string>

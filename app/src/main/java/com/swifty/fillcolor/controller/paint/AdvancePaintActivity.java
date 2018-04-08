@@ -2,6 +2,7 @@ package com.swifty.fillcolor.controller.paint;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -18,7 +19,6 @@ import com.swifty.fillcolor.controller.BaseActivity;
 import com.swifty.fillcolor.factory.MyDialogFactory;
 import com.swifty.fillcolor.model.SaveImageAsyn;
 import com.swifty.fillcolor.util.ShareImageUtil;
-import com.swifty.fillcolor.util.UmengUtil;
 import com.swifty.fillcolor.view.DragedTextView;
 import com.swifty.fillcolor.view.ImageButton_define;
 import com.swifty.fillcolor.view.MyProgressDialog;
@@ -102,7 +102,8 @@ public class AdvancePaintActivity extends BaseActivity {
     }
 
     private void uploadImage() {
-        Toast.makeText(AdvancePaintActivity.this, getString(R.string.comingsoon), Toast.LENGTH_SHORT).show();
+        Log.e("comingsoon", getString(R.string.comingsoon));
+        //Toast.makeText(AdvancePaintActivity.this, getString(R.string.comingsoon), Toast.LENGTH_SHORT).show();
     }
 
     private void initWindows() {
@@ -126,7 +127,6 @@ public class AdvancePaintActivity extends BaseActivity {
 
     private void shareDrawable() {
         paintview.setDrawingCacheEnabled(true);
-        UmengUtil.analysitic(AdvancePaintActivity.this, UmengUtil.SHAREIMAGE, imageUri);
         paintview.destroyDrawingCache();
         paintview.buildDrawingCache();
         MyProgressDialog.show(AdvancePaintActivity.this, null, getString(R.string.savingimage));

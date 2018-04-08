@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,12 +14,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
-import com.swifty.fillcolor.MyApplication;
-import com.swifty.fillcolor.broadcast.LoginSuccessBroadcast;
 import com.swifty.fillcolor.factory.MyDialogFactory;
-import com.swifty.fillcolor.factory.SharedPreferencesFactory;
 import com.swifty.fillcolor.listener.OnLoadCacheImageListener;
 import com.swifty.fillcolor.listener.OnLoadUserPaintListener;
 import com.swifty.fillcolor.listener.OnLoginSuccessListener;
@@ -30,7 +27,6 @@ import com.swifty.fillcolor.model.bean.LocalImageBean;
 import com.swifty.fillcolor.model.bean.UserBean;
 import com.swifty.fillcolor.util.L;
 import com.swifty.fillcolor.util.ListAnimationUtil;
-import com.swifty.fillcolor.util.UmengLoginUtil;
 import com.swifty.fillcolor.view.EmptyRecyclerView;
 
 import java.util.ArrayList;
@@ -146,7 +142,8 @@ public class UserFragment extends BaseFragment implements OnLoginSuccessListener
 //                    }
 //                }
 //                return false;
-                Toast.makeText(getActivity(), getString(R.string.comingsoon), Toast.LENGTH_SHORT).show();
+                Log.e("comingsoon", getString(R.string.comingsoon));
+                //Toast.makeText(getActivity(), getString(R.string.comingsoon), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -224,7 +221,6 @@ public class UserFragment extends BaseFragment implements OnLoginSuccessListener
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        UmengLoginUtil.getInstance().onActivityResult(requestCode, resultCode, data);
     }
 
     public void finish() {
@@ -234,6 +230,5 @@ public class UserFragment extends BaseFragment implements OnLoginSuccessListener
 
     @Override
     public void onLoginSuccess(UserBean userBean) {
-        UmengLoginUtil.getInstance().loginSuccessEvent(getActivity(), userBean, myDialogFactory);
     }
 }
