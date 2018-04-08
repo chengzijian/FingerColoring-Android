@@ -23,10 +23,10 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".controller.main.MainActivity"
+            android:name=".controller.main.SplashActivity"
             android:configChanges="locale"
             android:label="@string/app_name"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,6 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".controller.paint.PaintActivity"
             android:screenOrientation="portrait"
@@ -46,7 +47,20 @@
             android:name=".controller.paint.AdvancePaintActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.Dialog.NoActionBar"/>
-        
+
+        <activity
+            android:name=".ads.DemoApp"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTask"
+            android:label="@string/app_name" />
+
+        <activity
+            android:name=".controller.main.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

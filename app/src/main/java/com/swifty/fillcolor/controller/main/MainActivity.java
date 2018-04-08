@@ -13,21 +13,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.swifty.fillcolor.MyApplication;
 import com.swifty.fillcolor.R;
+import com.swifty.fillcolor.ads.QuitPopAd;
 import com.swifty.fillcolor.controller.AppCompatBaseAcitivity;
 import com.swifty.fillcolor.factory.MyDialogFactory;
 import com.swifty.fillcolor.factory.SharedPreferencesFactory;
-import com.swifty.fillcolor.listener.OnLoginSuccessListener;
-import com.swifty.fillcolor.model.bean.UserBean;
-import com.swifty.fillcolor.receiver.UserLoginReceiver;
 import com.swifty.fillcolor.util.CommentUtil;
 import com.swifty.fillcolor.util.SNSUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.waps.AppConnect;
 
 /**
  * Created by Swifty.Wang on 2015/7/31.
@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatBaseAcitivity {
     private ViewPager viewPager;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private long exitTime;
-    UserLoginReceiver receiver;
-    IntentFilter filter;
     public static MenuItem logout;
     MyDialogFactory myDialogFactory;
 
@@ -50,9 +48,13 @@ public class MainActivity extends AppCompatBaseAcitivity {
         setTitle(R.string.app_name);
         initViews();
         //showMarketCommentDialog();
-        receiver = new UserLoginReceiver();
-        filter = new IntentFilter();
-        filter.addAction("userLoginAction");
+        initAds();
+    }
+
+    private void initAds() {
+        // 互动广告调用方式
+        LinearLayout layout = (LinearLayout) findViewById(R.id.AdLinearLayout);
+        AppConnect.getInstance(this).showBannerAd(this, layout);
     }
 
     private void showMarketCommentDialog() {
@@ -146,7 +148,6 @@ public class MainActivity extends AppCompatBaseAcitivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_share) {
             SNSUtil.shareApp(this);
@@ -163,11 +164,16 @@ public class MainActivity extends AppCompatBaseAcitivity {
 
     @Override
     public void onBackPressed() {
-        if ((System.currentTimeMillis() - exitTime) > 2000) {
-            Toast.makeText(this, getString(R.string.pleasepressexit), Toast.LENGTH_SHORT).show();
-            exitTime = System.currentTimeMillis();
+        if(AppConnect.getInstance(this).hasPopAd(this)){
+            // 调用退屏广告
+            QuitPopAd.getInstance().show(this);
         } else {
-            finish();
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(this, getString(R.string.pleasepressexit), Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
         }
     }
 
@@ -176,22 +182,18 @@ public class MainActivity extends AppCompatBaseAcitivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(receiver, filter);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //unregisterReceiver(receiver);
     }
 }

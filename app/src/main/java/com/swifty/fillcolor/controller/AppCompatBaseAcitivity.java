@@ -1,5 +1,6 @@
 package com.swifty.fillcolor.controller;
 
+import android.content.Context;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 
