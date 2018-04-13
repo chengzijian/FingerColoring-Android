@@ -11,6 +11,7 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.inmobi.sdk.InMobiSdk;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
@@ -20,8 +21,6 @@ import com.swifty.fillcolor.util.ImageLoaderUtil;
 import com.swifty.fillcolor.util.L;
 
 import java.util.Locale;
-
-import cn.waps.AppConnect;
 
 /**
  * Created by Swifty.Wang on 2015/7/31.
@@ -67,13 +66,7 @@ public class MyApplication extends Application {
         initImageLoader();
         screenWidth = getScreenWidth(this);
 
-        // 初始化统计器，并通过代码设置APP_ID, APP_PID
-        AppConnect.getInstance("87cca2251899945f456e37aa60b1c2a5", "waps", this);
-//        AppConnect.getInstance("09f277ca386ee99cb4c910e09f562112", "waps", this);
-        // 预加载自定义广告内容（仅在使用了自定义广告、抽屉广告或迷你广告的情况，才需要添加）
-        AppConnect.getInstance(this).initAdInfo();
-        // 预加载插屏广告内容（仅在使用到插屏广告的情况，才需要添加）
-        AppConnect.getInstance(this).initPopAd(this);
+        InMobiSdk.init(this, "9697f54927be4ff3ba71a02181323d65"); //'this' is used specify context
     }
 
     public static void initLanguage(Context context) {

@@ -3,21 +3,21 @@ package com.swifty.fillcolor.controller.main;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.inmobi.ads.InMobiAdRequestStatus;
+import com.inmobi.ads.InMobiInterstitial;
 import com.swifty.fillcolor.R;
-import com.swifty.fillcolor.ads.QuitPopAd;
 import com.swifty.fillcolor.controller.AppCompatBaseAcitivity;
 import com.swifty.fillcolor.factory.MyDialogFactory;
 import com.swifty.fillcolor.factory.SharedPreferencesFactory;
@@ -26,8 +26,7 @@ import com.swifty.fillcolor.util.SNSUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.waps.AppConnect;
+import java.util.Map;
 
 /**
  * Created by Swifty.Wang on 2015/7/31.
@@ -51,10 +50,60 @@ public class MainActivity extends AppCompatBaseAcitivity {
         initAds();
     }
 
+    private InMobiInterstitial interstitial;
     private void initAds() {
-        // 互动广告调用方式
-        LinearLayout layout = (LinearLayout) findViewById(R.id.AdLinearLayout);
-        AppConnect.getInstance(this).showBannerAd(this, layout);
+        interstitial = new InMobiInterstitial(this, 1452964422388L, new InMobiInterstitial.InterstitialAdListener2() {
+            @Override
+            public void onAdLoadFailed(InMobiInterstitial inMobiInterstitial, InMobiAdRequestStatus inMobiAdRequestStatus) {
+                Log.e("", "");
+            }
+
+            @Override
+            public void onAdReceived(InMobiInterstitial inMobiInterstitial) {
+                Log.e("", "");
+            }
+
+            @Override
+            public void onAdLoadSucceeded(InMobiInterstitial inMobiInterstitial) {
+                Log.e("", "");
+            }
+
+            @Override
+            public void onAdRewardActionCompleted(InMobiInterstitial inMobiInterstitial, Map<Object, Object> map) {
+                Log.e("", "");
+            }
+
+            @Override
+            public void onAdDisplayFailed(InMobiInterstitial inMobiInterstitial) {
+                Log.e("", "");
+            }
+
+            @Override
+            public void onAdWillDisplay(InMobiInterstitial inMobiInterstitial) {
+                Log.e("", "");
+            }
+
+            @Override
+            public void onAdDisplayed(InMobiInterstitial inMobiInterstitial) {
+                Log.e("", "");
+            }
+
+            @Override
+            public void onAdInteraction(InMobiInterstitial inMobiInterstitial, Map<Object, Object> map) {
+                Log.e("", "");
+            }
+
+            @Override
+            public void onAdDismissed(InMobiInterstitial inMobiInterstitial) {
+                Log.e("", "");
+            }
+
+            @Override
+            public void onUserLeftApplication(InMobiInterstitial inMobiInterstitial) {
+                Log.e("", "");
+            }
+        });
+        interstitial.load();
     }
 
     private void showMarketCommentDialog() {
@@ -123,7 +172,9 @@ public class MainActivity extends AppCompatBaseAcitivity {
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewPager.setCurrentItem(0);
+                //viewPager.setCurrentItem(0);
+                if(interstitial.isReady())
+                    interstitial.show();
             }
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -164,16 +215,11 @@ public class MainActivity extends AppCompatBaseAcitivity {
 
     @Override
     public void onBackPressed() {
-        if(AppConnect.getInstance(this).hasPopAd(this)){
-            // 调用退屏广告
-            QuitPopAd.getInstance().show(this);
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(this, getString(R.string.pleasepressexit), Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
         } else {
-            if ((System.currentTimeMillis() - exitTime) > 2000) {
-                Toast.makeText(this, getString(R.string.pleasepressexit), Toast.LENGTH_SHORT).show();
-                exitTime = System.currentTimeMillis();
-            } else {
-                finish();
-            }
+            finish();
         }
     }
 

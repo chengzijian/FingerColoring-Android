@@ -10,6 +10,7 @@ android {
         targetSdkVersion 22
         versionCode 9
         versionName "2.0.0"
+        multiDexEnabled true // add this to enable multi-dex
     }
     buildTypes {
         release {

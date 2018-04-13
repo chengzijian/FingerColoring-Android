@@ -11,13 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.swifty.fillcolor.R;
-
-import cn.waps.AppConnect;
-import cn.waps.AppListener;
-import cn.waps.UpdatePointsListener;
-
-public class DemoApp extends Activity implements View.OnClickListener, UpdatePointsListener {
+public class DemoApp extends Activity {/* implements View.OnClickListener, UpdatePointsListener {
 
     private TextView pointsTextView;
     private TextView SDKVersionView;
@@ -123,10 +117,10 @@ public class DemoApp extends Activity implements View.OnClickListener, UpdatePoi
         super.onDestroy();
     }
 
-    /**
+    *//**
      * 用于监听插屏广告的显示与关闭
-     */
-    /*@Override
+     *//*
+    *//*@Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         Dialog dialog = AppConnect.getInstance(this).getPopAdDialog();
@@ -141,7 +135,7 @@ public class DemoApp extends Activity implements View.OnClickListener, UpdatePoi
                 }
             });
         }
-    }*/
+    }*//*
 
     // 创建一个线程
     final Runnable mUpdateResults = new Runnable() {
@@ -152,24 +146,24 @@ public class DemoApp extends Activity implements View.OnClickListener, UpdatePoi
         }
     };
 
-    /**
+    *//**
      * AppConnect.getPoints()方法的实现，必须实现
      *
      * @param currencyName 虚拟货币名称.
      * @param pointTotal   虚拟货币余额.
-     */
+     *//*
     public void getUpdatePoints(String currencyName, int pointTotal) {
         displayPointsText = currencyName + ": " + pointTotal;
         mHandler.post(mUpdateResults);
     }
 
-    /**
+    *//**
      * AppConnect.getPoints() 方法的实现，必须实现
      *
      * @param error 请求失败的错误信息
-     */
+     *//*
     public void getUpdatePointsFailed(String error) {
         displayPointsText = error;
         mHandler.post(mUpdateResults);
-    }
+    }*/
 }
