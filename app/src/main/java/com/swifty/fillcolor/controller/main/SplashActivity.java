@@ -1,5 +1,6 @@
 package com.swifty.fillcolor.controller.main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -7,12 +8,11 @@ import android.view.WindowManager;
 
 import com.swifty.fillcolor.R;
 import com.swifty.fillcolor.ads.DemoApp;
-import com.swifty.fillcolor.controller.AppCompatBaseAcitivity;
 
 /**
  * 开屏广告演示窗口
  */
-public class SplashActivity extends AppCompatBaseAcitivity {
+public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
